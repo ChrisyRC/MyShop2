@@ -10,17 +10,20 @@ namespace MyShop2.DataAccess.InMemory
 {
     public class ProductRepository
     {
-        ObjectCache cache = MemoryCache.Default;                   // cache oject set to default inmemory cache
+        ObjectCache cache = MemoryCache.Default;                   // cache object set to default inmemory cache
         List<Product> products;                                    // internal list
 
-        public ProductRepository()                                 // Consructor
+        public ProductRepository()
         {
-            products = cache["products"] as List<Product>;]
+            products = cache["products"] as List<Product>;
             if (products == null)
             {
                 products = new List<Product>();
+
             }
         }
+
+             
         public void Commit()                                                     // Method
         {
             cache["products"] = products;
@@ -62,10 +65,10 @@ namespace MyShop2.DataAccess.InMemory
             return products.AsQueryable();
         }
 
-        public voooid Delete(string Id)
+        public void Delete(string Id)
         {
             Product productToDelete = products.Find(p => p.Id == Id);
-            if (productToDelete != Null)
+            if (productToDelete != null)
             {
                 products.Remove(productToDelete);
             }

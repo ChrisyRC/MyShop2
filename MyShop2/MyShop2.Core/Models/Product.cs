@@ -13,14 +13,14 @@ namespace MyShop2.Core.Models
         public string Id { get; set; }
 
         [StringLength(20)]
-        [DisplayName("")]
+        [DisplayName("Product Name")]
         public string Name { get; set; }
         public string Description { get; set; }
 
         [Range(0, 1000)]
         public decimal Price { get; set; }
         public string Category { get; set; } 
-        public string Image { get;  setl}
+        public string Image { get; set; }
 
 
         public Product ()                         // Constructor that gives any new instance of Product an Id
