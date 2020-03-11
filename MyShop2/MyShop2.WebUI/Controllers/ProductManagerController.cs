@@ -5,16 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using MyShop2.Core.Models;                                                 // using statment added
 using MyShop2.DataAccess.InMemory;                                         // using statment added
+using MyShop2.Core.ViewModels;
 
 namespace MyShop2.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
 
-        ProductRepository context;                                           // Instance of ProductRepository
-        public ProductManagerController()                                    // Constructor to initialise context
+        ProductRepository context;                      // Instance of ProductRepository
+        ProductCategoryRepository productCategories;
+
+        public ProductManagerController()              // Constructor to initialise context
         {
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();   // Initialise it
         }
 
 
@@ -27,8 +31,13 @@ namespace MyShop2.WebUI.Controllers
 
         public ActionResult Create()                                            // method to create  product - displays page to fill in product details
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+
+
+            return View(viewModel);
         }
         [HttpPost]
         public ActionResult Create(Product product)                             // method to have product details posted in
@@ -55,7 +64,11 @@ namespace MyShop2.WebUI.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.ProductCategories = productCategories.Collection(); 
+
+                return View(viewModel);
             }
         }
         [HttpPost]
