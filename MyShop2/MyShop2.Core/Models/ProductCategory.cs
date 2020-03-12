@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace MyShop2.Core.Models
 {
-    public class ProductCategory
+    public class ProductCategory : BaseEntity
     {
-        public string Id { get; set; }                  // property
+     //   public string Id { get; set; }                  // property
         public string Category { get; set; }             // property
 
-        public ProductCategory()                        // constrictor to assign a value to Id
+   /*     public ProductCategory()                        // constrictor to assign a value to Id
         {
             this.Id = Guid.NewGuid().ToString();
         }
+  */
     }
 }
